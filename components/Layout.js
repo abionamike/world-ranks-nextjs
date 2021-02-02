@@ -3,7 +3,7 @@ import styles from '../styles/Layout.module.css';
 
 const Layout = ({ children, title }) => {
   return (
-    <div className="container">
+    <div className={styles.container}>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico"/>
@@ -18,7 +18,7 @@ const Layout = ({ children, title }) => {
         </svg>
 
       </header>
-        <main className={styles.main}>{children}</main>
+        <main>{children}</main>
       <footer className={styles.footer}>DevelopedbyMike | Copyright &copy; 2021</footer>
     </div>
   );

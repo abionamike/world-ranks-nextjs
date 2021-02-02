@@ -3,7 +3,7 @@ import { SearchRounded } from '@material-ui/icons';
 
 const SearchInput = ({ ...rest }) => {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <SearchRounded color="inherit" />
       <input className={styles.input} {...rest} />
     </div>
