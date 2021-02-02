@@ -15,6 +15,21 @@
   padding: 20px;
   color: var(--text-color-secondary);
   font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading_name {
+  justify-content: flex-start;
+}
+
+.heading_arrow {
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2px;
 }
 
 .row {
