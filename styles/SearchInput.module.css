@@ -4,7 +4,7 @@
   background-color: var(--background-color-dark);
   border-radius: 8px;
   padding-left: 16px;
-  color: var(--text-xolor-secondary);
+  color: var(--text-color-secondary);
 }
 
 .input {
@@ -17,5 +17,5 @@
 }
 
 .input::placeholder {
-  color: var(--text-xolor-secondary);
+  color: var(--text-color-secondary);
 }

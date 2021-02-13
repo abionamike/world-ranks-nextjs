@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@material-ui/icons';
 import styles from '../styles/Countries.module.css';
 
@@ -34,14 +35,14 @@ const SortArrow = ({ direction }) => {
 }
 
 const CountriesTable = ({ countries }) => {
-  const [direcion, setDirection] = useState();
+  const [direction, setDirection] = useState();
   const [value, setValue] = useState();
   const orderedCountries = orderBy(countries, value, direction);
 
   const switchDirection = () => {
-    if(!directionn){
+    if(!direction){
       setDirection('desc')
-    } else if(direcion === 'desc'){
+    } else if(direction === 'desc'){
       setDirection('asc');
     } else {
       setDirection(null);
