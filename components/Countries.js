@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@material-ui/icons';
 import styles from '../styles/Countries.module.css';
 
@@ -58,20 +59,31 @@ const CountriesTable = ({ countries }) => {
       <div className={styles.heading}>
         <button className={styles.heading_name}  onClick={() => setValueAndDirection('name')}>
           <div>Name</div>
-          <SortArrow />
+          {value === 'name' && <SortArrow direction={direction} />}
         </button>
         <button className={styles.heading_population} onClick={() => setValueAndDirection('population')}>
           <div>Population</div>
-          <SortArrow direction={direction} />
+          {value === 'population' && <SortArrow direction={direction} />}
+        </button>
+        <button className={styles.heading_area} onClick={() => setValueAndDirection('area')}>
+          <div>Area (km<sup style={{ fontSize: '0.5rem' }}>2</sup>)</div>
+          {value === 'area' && <SortArrow direction={direction} />}
+        </button>
+        <button className={styles.heading_gini} onClick={() => setValueAndDirection('gini')}>
+          <div>Gini</div>
+          {value === 'gini' && <SortArrow direction={direction} />}
         </button>
       </div>
 
       {orderedCountries.map((country) => (
-        <div className={styles.row}>
-          <div className={styles.name}>{country.name}</div>
+        <Link key={country.alpha3Code} href={`/country/${country.alpha3Code}`}>
+          <div className={styles.row}>
+            <div className={styles.name}>{country.name}</div>
 
-          <div className={styles.popluation}>{country.population}</div>
-        </div>))
+            <div className={styles.popluation}>{country.population}</div>
+          </div>
+        </Link>
+        ))
       }
     </div>
   );
