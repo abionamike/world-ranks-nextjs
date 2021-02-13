@@ -47,7 +47,7 @@
   margin-bottom: 16px;
   box-shadow: var(--box-shadow);
   font-weight: 500;
-
+  background-color: var(--background-color-light);
   transition: transform 200ms ease-out, box-shadow 200ms ease-in-out;
 }
 
