@@ -76,6 +76,7 @@
 
 .details_panel_borders_country {
   text-align: center;
+  cursor: pointer;
 }
 
 .details_panel_borders_label {

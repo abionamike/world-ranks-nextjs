@@ -1,4 +1,5 @@
 import { useEffect,useState } from "react";
+import Link from 'next/link';
 import Layout from "../../components/Layout";
 import styles from '../../styles/Country.module.css';
 
@@ -22,7 +23,6 @@ const Country = ({ country }) => {
     getBorders();
   }, []);
 
-  console.log(borders);
   return (
     <Layout title={country.name}>
       <div className={styles.container}>
@@ -81,11 +81,13 @@ const Country = ({ country }) => {
             <div className={styles.details_panel_borders}>
               <div className={styles.details_panel_borders_label}>Neighbouring Countries</div>
               <div className={styles.details_panel_borders_container}>
-                {borders.map(({ flag, name }) => 
-                  <div key={name} className={styles.details_panel_borders_country}>
-                    <img src={flag} alt={name} />
-                    <div className={styles.details_panel_borders_name}>{name}</div>
-                  </div>)
+                {borders.map(({ flag, name, alpha3Code }) => 
+                  <Link key={name} href={`/country/${alpha3Code}`}>
+                    <div className={styles.details_panel_borders_country}>
+                      <img src={flag} alt={name} />
+                      <div className={styles.details_panel_borders_name}>{name}</div>
+                    </div>
+                  </Link>)
                 }
               </div>
             </div>
