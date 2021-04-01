@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import CountriesTable from '../components/Countries';
 import Layout from '../components/Layout';
 import SearchInput from '../components/SearchInput';
 import styles from '../styles/Home.module.css';
 
-export default function Home({ countries }) {
-  const [keyword, setKeyword] = useState('');
-  const filteredCountries = countries.filter(country => country.name.toLowerCase().includes(keyword) || country.region.toLowerCase().includes(keyword)) || country.subregion.toLowerCase().includes(keyword);
+interface ICountry {
+  name: string;
+  region: string;
+}
 
-  const onInputChange = (e) => {
+export default function Home({ countries }: any) {
+  const [keyword, setKeyword] = useState<string>('');
+  const filteredCountries = countries.filter((country: ICountry) => country.name.toLowerCase().includes(keyword) || country.region.toLowerCase().includes(keyword)) || country.subregion.toLowerCase().includes(keyword);
+
+  const onInputChange = (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     setKeyword(e.target.value.toLowerCase());

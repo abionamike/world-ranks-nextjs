@@ -1,11 +1,16 @@
 import { Brightness6Rounded } from "@material-ui/icons";
 import Head from "next/head";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import styles from '../styles/Layout.module.css';
 
-const Layout = ({ children, title }) => {
-  const [theme, setTheme] = useState('light');
+interface ILayout {
+  children: ReactNode;
+  title: string;
+}
+
+const Layout = ({ children, title }: ILayout) => {
+  const [theme, setTheme] = useState<string>('light');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
@@ -20,7 +25,7 @@ const Layout = ({ children, title }) => {
     }
   }
 
-  const saveTheme = (theme) => {
+  const saveTheme = (theme: string) => {
     setTheme(theme);
     localStorage.setItem('theme', theme);
     document.documentElement.setAttribute('data-theme', theme);
