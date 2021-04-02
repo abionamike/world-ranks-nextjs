@@ -12,9 +12,13 @@ interface ILayout {
 const Layout = ({ children, title }: ILayout) => {
   const [theme, setTheme] = useState<string>('light');
 
+  const getItemsFromLocal = () => {
+    document.documentElement.setAttribute('data-theme', localStorage.getItem('theme')!);
+    setTheme(localStorage.getItem('theme')!);
+  }
+
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
-    setTheme(localStorage.getItem('theme'));
+    getItemsFromLocal();
   }, []);
 
   const switchTheme = () => {

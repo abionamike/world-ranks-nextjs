@@ -1,20 +1,27 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { useEffect,useState } from "react";
 import Link from 'next/link';
 import Layout from "../../components/Layout";
 import styles from '../../styles/Country.module.css';
 
-const getCountry = async (id) => {
+interface Iborders {
+  flag: string;
+  name: string;
+  alpha3Code: string;
+}
+
+const getCountry = async (id: string) => {
   const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
   const country = await res.json();
 
   return country;
 }
 
-const Country = ({ country }) => {
-  const [borders, setBorders] = useState([]);
+const Country = ({ country }: any) => {
+  const [borders, setBorders] = useState<any>([]);
 
   const getBorders = async () => {
-    const borders = await Promise.all(country.borders.map((border) => getCountry(border)));
+    const borders = await Promise.all(country.borders.map((border: string) => getCountry(border)));
 
     setBorders(borders);
   }
@@ -60,12 +67,12 @@ const Country = ({ country }) => {
 
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>Language</div>
-              <div className={styles.details_panel_value}>{country.languages.map(({ name }) => name).join(', ')}</div>
+              <div className={styles.details_panel_value}>{country.languages.map(({ name }: {name: string;}) => name).join(', ')}</div>
             </div>
 
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>Currencies</div>
-              <div className={styles.details_panel_value}>{country.currencies.map(({ name }) => name).join(', ')}</div>
+              <div className={styles.details_panel_value}>{country.currencies.map(({ name }: {name: string;}) => name).join(', ')}</div>
             </div>
 
             <div className={styles.details_panel_row}>
@@ -81,7 +88,7 @@ const Country = ({ country }) => {
             <div className={styles.details_panel_borders}>
               <div className={styles.details_panel_borders_label}>Neighbouring Countries</div>
               <div className={styles.details_panel_borders_container}>
-                {borders.map(({ flag, name, alpha3Code }) => 
+                {borders.map(({ flag, name, alpha3Code }: Iborders) => 
                   <Link key={name} href={`/country/${alpha3Code}`}>
                     <div className={styles.details_panel_borders_country}>
                       <img src={flag} alt={name} />
@@ -100,11 +107,11 @@ const Country = ({ country }) => {
  
 export default Country;
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch('https://restcountries.eu/rest/v2/all');
   const countries = await res.json();
 
-  const paths = countries.map(country => ({
+  const paths = countries.map((country: { alpha3Code: string }) => ({
     params: { id: country.alpha3Code.toString() }
   }));
 
@@ -114,7 +121,7 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }:any) => {
   const country = await getCountry(params.id);
 
   return {

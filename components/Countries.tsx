@@ -3,7 +3,16 @@ import Link from 'next/link';
 import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@material-ui/icons';
 import styles from '../styles/Countries.module.css';
 
-const orderBy = (countries, value, direction) => {
+interface ICountry { 
+  alpha3Code: string; 
+  name: string; 
+  area: string | number; 
+  flag: string; 
+  gini: string | number; 
+  population: string; 
+}
+
+const orderBy = (countries: any, value: string, direction: string) => {
   if(direction === 'asc') {
     return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
   }
@@ -15,7 +24,7 @@ const orderBy = (countries, value, direction) => {
   return countries;
 }
 
-const SortArrow = ({ direction }) => {
+const SortArrow = ({ direction }: any) => {
   if(!direction){
     return <></>;  
   }
@@ -35,9 +44,9 @@ const SortArrow = ({ direction }) => {
   }
 }
 
-const CountriesTable = ({ countries }) => {
-  const [direction, setDirection] = useState();
-  const [value, setValue] = useState();
+const CountriesTable = ({ countries }: any) => {
+  const [direction, setDirection] = useState<string>('');
+  const [value, setValue] = useState<string>('');
   const orderedCountries = orderBy(countries, value, direction);
 
   const switchDirection = () => {
@@ -46,11 +55,11 @@ const CountriesTable = ({ countries }) => {
     } else if(direction === 'desc'){
       setDirection('asc');
     } else {
-      setDirection(null);
+      setDirection('');
     }
   }
 
-  const setValueAndDirection = (value) => {
+  const setValueAndDirection = (value: string) => {
     switchDirection();
     setValue(value);
   }
@@ -76,7 +85,7 @@ const CountriesTable = ({ countries }) => {
         </button>
       </div>
 
-      {orderedCountries.map((country) => (
+      {orderedCountries.map((country: ICountry) => (
         <Link key={country.alpha3Code} href={`/country/${country.alpha3Code}`}>
           <div className={styles.row}>
             <div className={styles.flag}>

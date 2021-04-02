@@ -7,11 +7,12 @@ import styles from '../styles/Home.module.css';
 interface ICountry {
   name: string;
   region: string;
+  subregion: string;
 }
 
 export default function Home({ countries }: any) {
   const [keyword, setKeyword] = useState<string>('');
-  const filteredCountries = countries.filter((country: ICountry) => country.name.toLowerCase().includes(keyword) || country.region.toLowerCase().includes(keyword)) || country.subregion.toLowerCase().includes(keyword);
+  const filteredCountries = countries.filter((country: ICountry) => country.name.toLowerCase().includes(keyword) || country.region.toLowerCase().includes(keyword) || country.subregion.toLowerCase().includes(keyword));
 
   const onInputChange = (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
