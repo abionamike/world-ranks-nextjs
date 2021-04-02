@@ -1,4 +1,5 @@
-import { FormEvent, useState } from 'react';
+import { GetStaticProps } from 'next';
+import { ChangeEvent, useState } from 'react';
 import CountriesTable from '../components/Countries';
 import Layout from '../components/Layout';
 import SearchInput from '../components/SearchInput';
@@ -14,7 +15,7 @@ export default function Home({ countries }: any) {
   const [keyword, setKeyword] = useState<string>('');
   const filteredCountries = countries.filter((country: ICountry) => country.name.toLowerCase().includes(keyword) || country.region.toLowerCase().includes(keyword) || country.subregion.toLowerCase().includes(keyword));
 
-  const onInputChange = (e: FormEvent<HTMLInputElement>) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     setKeyword(e.target.value.toLowerCase());
@@ -33,7 +34,7 @@ export default function Home({ countries }: any) {
 }
 
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch('https://restcountries.eu/rest/v2/all');
   const countries = await res.json();
 
